@@ -19,11 +19,10 @@ steps:
 
 - script: |
     #!/bin/bash
-    set -euo pipefail
-
-    echo "${COSIGN_PUBLIC_KEY}"
-    # don't worry, the value will get censored
-    echo "${COSIGN_SECRET_KEY}"
+    set -xeuo pipefail
+    
+    echo -n "${COSIGN_PUBLIC_KEY}" | wc -c
+    echo -n "${COSIGN_SECRET_KEY}" | wc -c
   env:
     # normal variables are set automatically, but secrets have to be set explicitly :(
     COSIGN_SECRET_KEY: $(COSIGN_SECRET_KEY)
